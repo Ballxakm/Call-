@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>ชินกิตรับติว</title>
+
+<style>
+body {
+  font-family: sans-serif;
+  background:#f2f2f2;
+  margin:0;
+}
+header {
+  background:#2c3e50;
+  color:white;
+  padding:15px;
+  text-align:center;
+}
+.container {
+  max-width:500px;
+  margin:auto;
+  padding:15px;
+}
+.product {
+  background:white;
+  margin-bottom:15px;
+  padding:15px;
+  border-radius:8px;
+}
+.product img {
+  width:100%;
+  border-radius:8px;
+  margin-bottom:10px;
+}
+button {
+  background:green;
+  color:white;
+  border:none;
+  padding:10px;
+  width:100%;
+  border-radius:5px;
+  font-size:16px;
+}
+.cart {
+  background:white;
+  padding:15px;
+  border-radius:8px;
+}
+.cart-item {
+  display:flex;
+  justify-content:space-between;
+}
+.total {
+  font-weight:bold;
+  margin-top:10px;
+}
+.line-btn {
+  background:#00c300;
+  margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1> ชินกิตรับติว</h1>
+  <p>แคลคูลัส</p>
+</header>
+
+<div class="container">
+
+  <div class="product">
+    <img src="c:\Users\Admin\Downloads\ชิน.jpg" alt=>
+    <h3>แคล 1</h3>
+    <p>ราคา 99 บาท/ชม</p>
+    <button onclick="addToCart('แคล 1',99)">เพิ่มลงตะกร้า</button>
+  </div>
+
+  <div class="product">
+    <img src="" alt="">
+    <h3>แคล 2</h3>
+    <p>ยังม่เปิด</p>
+    <button onclick="addToCart('แคล 2',-)">-</button>
+  </div>
+
+  <div class="product">
+    <img src="" alt="">
+    <h3>แคล 3</h3>
+    <p>ยังม่เปิด</p>
+    <button onclick="addToCart('แคล 3',-)">-</button>
+  </div>
+
+  <div class="cart">
+    <h2>🧺 ตะกร้าสินค้า</h2>
+    <div id="cartItems"></div>
+    <div class="total" id="totalPrice">รวม: 0 บาท</div>
+    <button class="line-btn" onclick="order()">IG</button>
+  </div>
+
+</div>
+
+<script>
+let cart = [];
+let total = 0;
+
+function addToCart(name, price) {
+  cart.push({name, price});
+  total += price;
+  renderCart();
+}
+
+function removeItem(index) {
+  total -= cart[index].price;
+  cart.splice(index, 1);
+  renderCart();
+}
+
+function renderCart() {
+  let html = '';
+  cart.forEach((item, index) => {
+    html += `
+      <div class="cart-item">
+        <span>${item.name} (${item.price}฿)</span>
+        <button onclick="removeItem(${index})" style="background:red;border:none;color:white;padding:5px 8px;border-radius:4px;">
+          ลบ
+        </button>
+      </div>
+    `;
+  });
+
+  document.getElementById('cartItems').innerHTML = html;
+  document.getElementById('totalPrice').innerText = 'รวม: ' + total + ' บาท';
+}
+
+function order() {
+  if(cart.length === 0){
+    alert('ยังไม่มีสินค้าในตะกร้า');
+    return;
+  }
+
+  let message = 'สั่งซื้อสินค้า:%0A';
+  cart.forEach(item => {
+    message += `- ${item.name} ${item.price} บาท%0A`;
+  });
+  message += `รวม ${total} บาท`;
+
+  window.location.href =
+   `https://www.instagram.com/asmode_uss?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==`;
+}
+</script>
+
+  });
+  message += `รวม ${total} บาท`;
+
+  // 🔴 แก้ YOUR_LINE_ID เป็นไลน์ร้าน
+  window.location.href =
+   `https://line.me/R/ti/p/~YOUR_LINE_ID?text=${message}`;
+}
+</script>
+
+</body>
+</html>
